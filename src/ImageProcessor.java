@@ -1,57 +1,44 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
+import java.awt.image.ColorConvertOp;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class ImageProcessor {
 
     BufferedImage img = null;
-    byte[] pixels;
-    ArrayList<int[]> pixelRGBs = new ArrayList<int[]>();
     public StringBuilder asciiArt = new StringBuilder();
 
     public int imgWidth;
     public int imgHeight;
 
     // Single character wide
-    /*
-    char whitePixel = " ";
-    char lightGreyPixel = '.';
-    char mediumGreyPixel = '*';
-    char darkGreyPixel = '@';
-    char blackPixel = '$';
-    */
 
     // Double character wide (Best usually)
     String whitePixel = "  ";
-    String lightGreyPixel = "..";
-    String mediumGreyPixel = "**";
-    String darkGreyPixel = "//";
-    String darkestGreyPixel = "@@";
-    String blackPixel = "$$";
+    String lightGreyPixel = "**";
+    String mediumGreyPixel = "//";
+    String darkGreyPixel = "SS";
+    String darkestGreyPixel = "88";
+    String blackPixel = "@@";
 
     // Triple character wide
-    /*
-    String whitePixel = "   ";
-    String lightGreyPixel = "...";
-    String mediumGreyPixel = "***";
-    String darkGreyPixel = "///";
-    String darkestGreyPixel = "@@@";
-    String blackPixel = "$$$";
-    */
 
     File outputFile;
     FileWriter fileWriter;
 
-    public ImageProcessor() throws IOException {
+    public ImageProcessor(String path) throws IOException {
         try
         {
-            img = ImageIO.read(new File("src/Images/Walter White Low Res.jpg"));
+            //img = ImageIO.read(new File("src/Images/Happy Chaos Low Res.png"));
+            img = ImageIO.read(new File(path));
             System.out.println("Successfully loaded target image");
+            // Converts image to monochrome
+            ColorConvertOp op = new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY), null);
+            op.filter(img, img);
         } catch (IOException e){
             System.out.println("Failed to load target image");
             System.exit(0);
@@ -74,17 +61,8 @@ public class ImageProcessor {
                 int pixel = img.getRGB(x, y);
                 Color color = new Color(pixel, true);
 
+                // In a black and white image all the rgb channels are equal so only one needs to be used
                 int brightness = color.getRed();
-
-                // Generates Ascii for the Image
-                /*
-                Notes:
-                ~250 = Basically White
-                ~200 = Light
-                ~150 = Medium Grey
-                ~100 = Dark Grey
-                <100 = Basically Black
-                 */
 
                 if (brightness > 250) {
                     asciiArt.append(whitePixel);
@@ -106,7 +84,7 @@ public class ImageProcessor {
                     asciiArt.append(darkestGreyPixel);
                     fileWriter.write(darkestGreyPixel);
                 }
-                else if (brightness < 100) {
+                else {
                     asciiArt.append(blackPixel);
                     fileWriter.write(blackPixel);
                 }
