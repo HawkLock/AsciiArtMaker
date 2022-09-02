@@ -27,16 +27,18 @@ public class ImageProcessor {
     String blackPixel = "@@";
     String[] PixelColors = // going down in brightness
             {
-                    "  ",
-                    "..",
-                    "**",
-                    "//",
-                    "ZZ",
-                    "SS",
-                    "OO",
-                    "88",
-                    "@@"
+                    " ",
+                    ".",
+                    "*",
+                    "\\",
+                    "Z",
+                    "S",
+                    "O",
+                    "8",
+                    "@"
             };
+
+    short pixelDepth = 2;
 
     // Triple character wide
 
@@ -78,40 +80,58 @@ public class ImageProcessor {
                 int brightness = color.getRed();
 
                 if (brightness > 225) {
-                    asciiArt.append(PixelColors[0]);
-                    fileWriter.write(PixelColors[0]);
+                    for (short depthI = 0; depthI < pixelDepth; depthI++) {
+                        asciiArt.append(PixelColors[0]);
+                        fileWriter.write(PixelColors[0]);
+                    }
                 }
                 else if (brightness > 200) {
-                    asciiArt.append(PixelColors[1]);
-                    fileWriter.write(PixelColors[1]);
+                    for (short depthI = 0; depthI < pixelDepth; depthI++) {
+                        asciiArt.append(PixelColors[1]);
+                        fileWriter.write(PixelColors[1]);
+                    }
                 }
                 else if (brightness >= 175) {
-                    asciiArt.append(PixelColors[2]);
-                    fileWriter.write(PixelColors[2]);
+                    for (short depthI = 0; depthI < pixelDepth; depthI++) {
+                        asciiArt.append(PixelColors[2]);
+                        fileWriter.write(PixelColors[2]);
+                    }
                 }
                 else if (brightness >= 150) {
-                    asciiArt.append(PixelColors[3]);
-                    fileWriter.write(PixelColors[3]);
+                    for (short depthI = 0; depthI < pixelDepth; depthI++) {
+                        asciiArt.append(PixelColors[3]);
+                        fileWriter.write(PixelColors[3]);
+                    }
                 }
                 else if (brightness >= 100) {
-                    asciiArt.append(PixelColors[4]);
-                    fileWriter.write(PixelColors[4]);
+                    for (short depthI = 0; depthI < pixelDepth; depthI++) {
+                        asciiArt.append(PixelColors[4]);
+                        fileWriter.write(PixelColors[4]);
+                    }
                 }
                 else if (brightness >= 75) {
-                    asciiArt.append(PixelColors[5]);
-                    fileWriter.write(PixelColors[5]);
+                    for (short depthI = 0; depthI < pixelDepth; depthI++) {
+                        asciiArt.append(PixelColors[5]);
+                        fileWriter.write(PixelColors[5]);
+                    }
                 }
                 else if (brightness >= 50) {
-                    asciiArt.append(PixelColors[6]);
-                    fileWriter.write(PixelColors[6]);
+                    for (short depthI = 0; depthI < pixelDepth; depthI++) {
+                        asciiArt.append(PixelColors[6]);
+                        fileWriter.write(PixelColors[6]);
+                    }
                 }
                 else if (brightness >= 25) {
-                    asciiArt.append(PixelColors[7]);
-                    fileWriter.write(PixelColors[7]);
+                    for (short depthI = 0; depthI < pixelDepth; depthI++) {
+                        asciiArt.append(PixelColors[7]);
+                        fileWriter.write(PixelColors[7]);
+                    }
                 }
                 else {
-                    asciiArt.append(PixelColors[8]);
-                    fileWriter.write(PixelColors[8]);
+                    for (short depthI = 0; depthI < pixelDepth; depthI++) {
+                        asciiArt.append(PixelColors[8]);
+                        fileWriter.write(PixelColors[8]);
+                    }
                 }
             }
             asciiArt.append("\n");
