@@ -1,0 +1,1 @@
+This is just a simple program that can convert images(preferably lower resolution ones) into ascii art. It let me skip my school's AP Computer Science class, so it holds a nice place in my heart despite being slightly basic.
